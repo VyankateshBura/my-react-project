@@ -8,31 +8,35 @@ const Course = ({ course }) => {
   const allCourse = useRef([]);
 
   useEffect(() => {
-    if (!hasFetchedData.current) {
       console.log('Fetching data...');
-      axios.get('http://localhost:8080/api/course/all')
+      axios.get('http://192.168.1.8:8080/api/course/all')
         .then((response) => {
           setData(response.data);
-          console.log(response.data);
-          allCourse.current = response.data; // Update current value of allCourse
+          console.log("Course data "+response.data);
+          allCourse.current = response.data; 
           console.log(allCourse.current);
         })
         .catch(e => console.log(e));
       hasFetchedData.current = true;
-    }
   }, []);
 
   return (
-    <div className="course">
-      {allCourse.current.map(course => (
-        <div key={course.id}>
-          <h3>{course.name}</h3>
-          <p>Instructor: {course.type}</p>
-          <p>Duration: {course.fees}</p>
-          <button>Select</button>
+    <div className="container mx-4 my-5">
+  <div className="row row-cols-1 row-cols-md-3 g-4">  
+    {allCourse.current.map(course => (
+      <div key={course.id} className="col">
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">{course.name}</h5>
+            <p className="card-text">Instructor: {course.type}</p>
+            <p className="card-text">Duration: {course.fees}</p>
+            <button  className="btn btn-primary"><Link to="/course/modules/all">Select</Link></button>
+          </div>
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
+  </div>
+</div>
   );
 };
 

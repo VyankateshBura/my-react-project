@@ -1,54 +1,54 @@
-// src/Login.jsx
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Login.css'; // Import your custom CSS file for additional styling
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
-  const [data, setData] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    console.log("call");
     e.preventDefault();
-    // Handle login logic here
+    console.log("call");
+    
     navigate('/course/all');
-    // const data =  axios.get('http://localhost:8080/api/course/all').then((response)=> {
-    //   setData(response.data)
-    //   console.log(response)
-    //   history.push('/course')
-    // }).catch(e=> console.log(e))
-    // console.log(data);
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+    <div className="container justify-content-center align-items-center my-5" style={{margin:'auto',width:"30%",height:"20%"}}>
+      <div className="card shadow-sm border">
+        <div className="card-body">
+          <h2 className="card-title text-center mb-4">Login</h2>
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-group mb-3">
+              <label htmlFor="username" className="form-label">Username</label>
+              <input
+                type="email"
+                className="form-control"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary d-block mx-auto">
+              Login
+            </button>
+          </form>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+      </div>
     </div>
   );
 }
