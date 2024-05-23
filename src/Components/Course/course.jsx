@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './course.css';
 
 const Course = ({ course }) => {
@@ -9,7 +10,7 @@ const Course = ({ course }) => {
 
   useEffect(() => {
       console.log('Fetching data...');
-      axios.get('http://192.168.1.8:8080/api/course/all')
+      axios.get('http://localhost:8080/api/course/all')
         .then((response) => {
           setData(response.data);
           console.log("Course data "+response.data);
@@ -30,7 +31,7 @@ const Course = ({ course }) => {
             <h5 className="card-title">{course.name}</h5>
             <p className="card-text">Instructor: {course.type}</p>
             <p className="card-text">Duration: {course.fees}</p>
-            <button  className="btn btn-primary"><Link to="/course/modules/all">Select</Link></button>
+            <button  className="btn btn-light" ><Link to={"/course/"+course.id} style={{textDecoration:'none'}}>Select</Link></button>
           </div>
         </div>
       </div>
